@@ -1,0 +1,164 @@
+
+body, html {
+    height: 50%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #121212, #333333);
+}
+
+/* sign in */
+
+#signin-container{
+    border: solid 5px black;
+    border-radius: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    display: none;
+    border-color: #ff0000; /* Blood red border */
+    background-color: #1c1c1c;
+}
+
+#signin-container h2{
+    padding: 0 auto;
+    font-size: 40px;
+    color: #ff4d4d;
+}
+
+#signin-container input{
+    display: grid;
+    grid-template-rows: auto;
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    font-size: medium;
+    font-weight: 700;
+    background-color: #333; /* Dark gray input background */
+    color: #f5f5f5;
+    color: #f5f5f5;
+}
+
+.signinbutton{
+    display: grid;
+    grid-template-rows: auto;
+    width: 100px;
+    height: 25px;
+    margin: 10px auto;
+}
+
+.moveToSignup{
+    display: grid;
+    grid-template-rows: auto;
+    width: 300px;
+    height: 22px;
+    margin: 10px auto;
+    color: #ff4d4d;
+}
+
+/* Sign up */
+
+#signup-container{
+    border: solid 5px black;
+    border-radius: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    display: block;
+    border-color: #ff0000; /* Blood red border */
+    background-color: #1c1c1c;
+}
+
+#signup-container h2{
+    padding: 0 auto;
+    font-size: 40px;
+    color: #ff4d4d;
+}
+
+#signup-container input{
+    display: grid;
+    grid-template-rows: auto;
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    font-size: medium;
+}
+
+.signupbutton{
+    display: grid;
+    grid-template-rows: auto;
+    width: 100px;
+    height: 25px;
+    margin: 10px auto;
+}
+
+.moveToSignin{
+    display: grid;
+    grid-template-rows: auto;
+    width: 300px;
+    height: 22px;
+    margin: 10px auto;
+}
+
+/* To-do container */
+
+
+#todos-container{
+    border: solid 5px black;
+    border-radius: 8px;
+    padding-right: 50px;
+    padding-left: 50px;
+    display: none;
+    background-image: linear-gradient(to right, #3a0ca3, #f72585);
+    margin-top: 100px;
+}
+
+.todos-input-container{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 5px;
+    width: 300px;
+    height: 30px;
+    margin: 10px auto;
+}
+
+.todos-input-container input{
+    font-size: large;
+}
+
+#todos-list{
+    display: grid;
+    grid-template-rows: auto;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.todo-item .input-container input{
+    flex: 2;
+    width: 200px;
+    height: 25px;
+    font-size: large;
+}
+
+.controls-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 5px;
+}
+
+.controls-container input{
+    width: 20px;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 5px;
+}
+
