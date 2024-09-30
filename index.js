@@ -2,7 +2,7 @@ const express = require("express")
 const jwt = require("jsonwebtoken")
 const path = require("path")
 const cors = require('cors');
-
+const { z } = require("zod");
 
 
 const app = express();
@@ -18,23 +18,43 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/signup",(req, res)=>{
 
-    const { username, password} = req.body
+    const requirebody = z.object({
+        username: z.string().min(1, "Username is required"),
+        password: z.string()
+            .min(8, "Password must be at least 8 characters long")
+            .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+            .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+            .regex(/[0-9]/, "Password must contain at least one number")
+            .regex(/[!@#$%^&*()_+-=~[]{}|;:'",.<>]/, "Password must contain atleast one special character")
+    });
 
-    if(!username || !password){
-        res.json({
-            message: "username and password fields can not be empty"
-        })
+
+
+    try{
+        const { username, password} = requirebody.parse(req.body);
+
+
+        if(users.find((user) => user.username===username)){
+            return res.json({
+                message: "You are already signed up"
+            })
+        }
+
+        users.push({ username, password})
+
+        res.json({ message : "you are succesfully signed up!"});
+
+    }catch(err){
+        if (err instanceof z.ZodError) {
+            // Extract error messages from Zod validation
+            const errorMessages = err.errors.map(error => error.message);
+
+            // Send the error messages back to the frontend
+            return res.status(400).json({ message: errorMessages });
+        } else {
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
     }
-
-    if(users.find((user) => user.username===username)){
-        return res.json({
-            message: "You are already signed up"
-        })
-    }
-
-    users.push({ username, password})
-
-    res.json({ message : "you are succesfully signed up!"});
 })
 
 app.post("/signin", (req, res)=>{

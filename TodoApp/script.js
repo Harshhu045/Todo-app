@@ -24,6 +24,8 @@ function showTodoApp(){
 // function to handle sign up and sign in user
 
 async function signup() {
+    // event.preventDefault();
+    
     const username = document.getElementById("signup-username").value;
     const password = document.getElementById("signup-password").value;
     try{
@@ -32,15 +34,42 @@ async function signup() {
             password
         })
 
+        // Log the response for debugging
+        console.log("Server response:", response.data);
+
         alert(response.data.message);
+
+        // Display the message in the div
+        const messageDiv = document.getElementById("message");
+        messageDiv.textContent = response.data.message;
+        messageDiv.style.color = response.data.message === "You are already signed up" ? 'red' : 'green';
 
         if(response.data.message==="you are signedup suceesfully"){
             moveToSignin();
         }
+        else{
+            document.getElementById("message").textContent = response.data.message;
+        }
     }catch(error){
         console.error("Error while sign up",error);
+
+        // Check if it's a validation error
+        if (error.response && error.response.status === 400) {
+            const messageDiv = document.getElementById('message');
+            const errorMessages = error.response.data.message;
+
+            // Display the error messages in the div
+            messageDiv.innerHTML = errorMessages.map(msg => `<p style="color: yellow;">${msg}</p>`).join('');
+        } else {
+            // Handle other errors (e.g., network issues)
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = "Something went wrong. Please try again.";
+            messageDiv.style.color = 'yellow';
+        }
     }
 }
+
+document.getElementById("signup-container").addEventListener('submit', signup);
 
 async function signin() {
     const username = document.getElementById("signup-username").value;
